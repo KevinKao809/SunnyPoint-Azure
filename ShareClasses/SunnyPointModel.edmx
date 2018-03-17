@@ -1,0 +1,593 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SunnyPointModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AccountProfiles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="128" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="128" />
+          <Property Name="TimeZone" Type="int" />
+          <Property Name="LoginID" Type="nvarchar" MaxLength="128" />
+          <Property Name="LoginPassword" Type="nvarchar" MaxLength="128" />
+          <Property Name="ProfilePictureUri" Type="nvarchar" MaxLength="128" />
+          <Property Name="isCompany" Type="bit" />
+          <Property Name="Rating" Type="int" />
+          <Property Name="Ranking" Type="int" />
+          <Property Name="Trips" Type="int" />
+          <Property Name="Distance" Type="float" />
+          <Property Name="DriveTimeInMin" Type="int" />
+          <Property Name="HardBreaks" Type="int" />
+          <Property Name="HardAccelerations" Type="int" />
+          <Property Name="FuelConsumption" Type="float" />
+          <Property Name="MaxSpeed" Type="float" />
+          <Property Name="AverageSpeed" Type="float" />
+          <Property Name="OverSpeeds" Type="int" />
+          <Property Name="MidnightDriveInMin" Type="int" />
+          <Property Name="CreatedAt" Type="datetime" StoreGeneratedPattern="Computed" />
+          <Property Name="UpdatedAt" Type="datetime" />
+          <Property Name="Deleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="DashboardCurrentData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccountID" Type="int" Nullable="false" />
+          <Property Name="CurrentMonthScore" Type="int" />
+          <Property Name="PreviousMonthScore" Type="int" />
+          <Property Name="CurrentMonthNegativeEvents" Type="int" />
+          <Property Name="PreviousMonthNegativeEvents" Type="int" />
+          <Property Name="CurrentMonthDayTrips" Type="int" />
+          <Property Name="PreviousMonthDayTrips" Type="int" />
+          <Property Name="CurrentMonthDayMileage" Type="float" />
+          <Property Name="PreviousMonthDayMileage" Type="float" />
+          <Property Name="HardBreaks" Type="int" />
+          <Property Name="HardAccelerations" Type="int" />
+          <Property Name="OverSpeed" Type="int" />
+          <Property Name="Day_NegativeEvents" Type="float" />
+          <Property Name="Midnight_NegativeEvents" Type="float" />
+          <Property Name="CreatedAt" Type="datetime" />
+          <Property Name="UpdatedAt" Type="datetime" />
+          <Property Name="Deleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="DashboardMonthlyData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccountID" Type="int" Nullable="false" />
+          <Property Name="YearMonth" Type="nvarchar" MaxLength="50" />
+          <Property Name="DurationInMin" Type="int" />
+          <Property Name="Mileage" Type="float" />
+          <Property Name="Score" Type="int" />
+          <Property Name="NegativeEvents" Type="int" />
+          <Property Name="Trips" Type="int" />
+          <Property Name="CreatedAt" Type="datetime" StoreGeneratedPattern="Computed" />
+          <Property Name="UpdatedAt" Type="datetime" />
+          <Property Name="Deleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="Devices">
+          <Key>
+            <PropertyRef Name="IoTHubDeviceID" />
+          </Key>
+          <Property Name="IoTHubDeviceID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="IoTHubHostName" Type="nvarchar" MaxLength="128" />
+          <Property Name="IoTHubProtocol" Type="nvarchar" MaxLength="128" />
+          <Property Name="isActive" Type="bit" />
+          <Property Name="AccountID" Type="int" />
+          <Property Name="AccelerationAxis" Type="nvarchar" MaxLength="5" />
+          <Property Name="HardAccelerationValue" Type="float" />
+          <Property Name="HardBreakValue" Type="float" />
+          <Property Name="RegisterCountry" Type="nvarchar" MaxLength="10" />
+          <Property Name="CreatedAt" Type="datetime" StoreGeneratedPattern="Computed" />
+          <Property Name="UpdatedAt" Type="datetime" />
+          <Property Name="Deleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="IoTHubs">
+          <Key>
+            <PropertyRef Name="IoTHubHostName" />
+          </Key>
+          <Property Name="IoTHubHostName" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="PrimaryIoTHubConnectionString" Type="nvarchar" MaxLength="256" />
+          <Property Name="SecondaryIoTHubConnectionString" Type="nvarchar" MaxLength="256" />
+          <Property Name="CreatedAt" Type="datetime" StoreGeneratedPattern="Computed" />
+          <Property Name="UpdatedAt" Type="datetime" />
+          <Property Name="Deleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="TripPoints">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TripID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="CarID" Type="nvarchar" MaxLength="128" />
+          <Property Name="IoTHubDeviceID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="MessageType" Type="nvarchar" MaxLength="20" />
+          <Property Name="RecordedTimeStamp" Type="bigint" />
+          <Property Name="Country" Type="nvarchar" MaxLength="10" />
+          <Property Name="LocalTime" Type="datetime" />
+          <Property Name="MidNightDrive" Type="bit" />
+          <Property Name="Altitude" Type="decimal" Precision="12" Scale="9" />
+          <Property Name="Latitude" Type="decimal" Precision="12" Scale="9" />
+          <Property Name="Longitude" Type="decimal" Precision="12" Scale="9" />
+          <Property Name="Speed" Type="float" />
+          <Property Name="SpeedLimit" Type="float" />
+          <Property Name="OverSpeed" Type="bit" />
+          <Property Name="RPM" Type="float" />
+          <Property Name="AccelerationX" Type="float" />
+          <Property Name="AccelerationY" Type="float" />
+          <Property Name="AccelerationZ" Type="float" />
+          <Property Name="AccelerationXYZ" Type="float" />
+          <Property Name="MAF" Type="float" />
+          <Property Name="Temp" Type="float" />
+          <Property Name="IdlingStartTime" Type="bigint" />
+          <Property Name="IdlingEndTime" Type="bigint" />
+          <Property Name="IdlingTime" Type="bigint" />
+          <Property Name="TripStartTime" Type="bigint" />
+          <Property Name="TripEndTime" Type="bigint" />
+          <Property Name="TripTime" Type="bigint" />
+          <Property Name="CreatedAt" Type="datetime" StoreGeneratedPattern="Computed" />
+          <Property Name="UpdatedAt" Type="datetime" />
+          <Property Name="Deleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="Trips">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="CarID" Type="nvarchar" MaxLength="128" />
+          <Property Name="IoTHubDeviceID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="AccountID" Type="int" />
+          <Property Name="StartTimeStamp" Type="bigint" Nullable="false" />
+          <Property Name="EndTimeStamp" Type="bigint" />
+          <Property Name="StartDateTime" Type="datetime" />
+          <Property Name="StartCountry" Type="nvarchar" MaxLength="20" />
+          <Property Name="EndCountry" Type="nvarchar" MaxLength="20" />
+          <Property Name="isComplete" Type="bit" />
+          <Property Name="Distance" Type="float" />
+          <Property Name="HardBreaks" Type="int" />
+          <Property Name="HardAccelerations" Type="int" />
+          <Property Name="OverSpeeds" Type="int" />
+          <Property Name="MaxSpeed" Type="float" />
+          <Property Name="AverageSpeed" Type="float" />
+          <Property Name="MidNightDriveInSec" Type="int" />
+          <Property Name="DriveTimeInSec" Type="int" />
+          <Property Name="IdelingTimeInSec" Type="int" />
+          <Property Name="ProcessCompleteFlag" Type="bit" />
+          <Property Name="Rating" Type="int" />
+          <Property Name="CenterLat" Type="decimal" Precision="12" Scale="9" />
+          <Property Name="CenterLng" Type="decimal" Precision="12" Scale="9" />
+          <Property Name="MaxLat" Type="decimal" Precision="12" Scale="9" />
+          <Property Name="Maxlng" Type="decimal" Precision="12" Scale="9" />
+          <Property Name="MinLat" Type="decimal" Precision="12" Scale="9" />
+          <Property Name="MinLng" Type="decimal" Precision="12" Scale="9" />
+          <Property Name="CreatedAt" Type="datetime" StoreGeneratedPattern="Computed" />
+          <Property Name="UpdatedAt" Type="datetime" />
+          <Property Name="Deleted" Type="bit" />
+        </EntityType>
+        <EntityContainer Name="SunnyPointModelStoreContainer">
+          <EntitySet Name="AccountProfiles" EntityType="Self.AccountProfiles" Schema="SunnyPoint" store:Type="Tables" />
+          <EntitySet Name="DashboardCurrentData" EntityType="Self.DashboardCurrentData" Schema="SunnyPoint" store:Type="Tables" />
+          <EntitySet Name="DashboardMonthlyData" EntityType="Self.DashboardMonthlyData" Schema="SunnyPoint" store:Type="Tables" />
+          <EntitySet Name="Devices" EntityType="Self.Devices" Schema="SunnyPoint" store:Type="Tables" />
+          <EntitySet Name="IoTHubs" EntityType="Self.IoTHubs" Schema="SunnyPoint" store:Type="Tables" />
+          <EntitySet Name="TripPoints" EntityType="Self.TripPoints" Schema="SunnyPoint" store:Type="Tables" />
+          <EntitySet Name="Trips" EntityType="Self.Trips" Schema="SunnyPoint" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SunnyPointModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AccountProfiles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="LoginID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="LoginPassword" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ProfilePictureUri" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="isCompany" Type="Boolean" annotation:StoreGeneratedPattern="None" DefaultValue="false" />
+          <Property Name="Rating" Type="Int32" DefaultValue="0" />
+          <Property Name="Ranking" Type="Int32" DefaultValue="0" />
+          <Property Name="Trips" Type="Int32" DefaultValue="0" />
+          <Property Name="Distance" Type="Double" DefaultValue="0" />
+          <Property Name="DriveTimeInMin" Type="Int32" DefaultValue="0" />
+          <Property Name="HardBreaks" Type="Int32" DefaultValue="0" />
+          <Property Name="HardAccelerations" Type="Int32" DefaultValue="0" />
+          <Property Name="FuelConsumption" Type="Double" DefaultValue="0" />
+          <Property Name="MaxSpeed" Type="Double" DefaultValue="0" />
+          <Property Name="AverageSpeed" Type="Double" DefaultValue="0" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="3" annotation:StoreGeneratedPattern="None" />
+          <Property Name="Deleted" Type="Boolean" annotation:StoreGeneratedPattern="None" DefaultValue="false" />
+          <Property Name="MidnightDriveInMin" Type="Int32" />
+          <Property Name="OverSpeeds" Type="Int32" DefaultValue="0" />
+          <Property Name="TimeZone" Type="Int32" />
+        </EntityType>
+
+        <EntityType Name="DashboardCurrentData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountID" Type="Int32" Nullable="false" />
+          <Property Name="CurrentMonthScore" Type="Int32" DefaultValue="0" />
+          <Property Name="PreviousMonthScore" Type="Int32" DefaultValue="0" />
+          <Property Name="CurrentMonthNegativeEvents" Type="Int32" DefaultValue="0" />
+          <Property Name="PreviousMonthNegativeEvents" Type="Int32" DefaultValue="0" />
+          <Property Name="HardBreaks" Type="Int32" DefaultValue="0" />
+          <Property Name="HardAccelerations" Type="Int32" DefaultValue="0" />
+          <Property Name="OverSpeed" Type="Int32" DefaultValue="0" />
+          <Property Name="Day_NegativeEvents" Type="Double" DefaultValue="0" />
+          <Property Name="Midnight_NegativeEvents" Type="Double" DefaultValue="0" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="3" annotation:StoreGeneratedPattern="None" />
+          <Property Name="Deleted" Type="Boolean" annotation:StoreGeneratedPattern="None" DefaultValue="false" />
+          <Property Name="CurrentMonthDayTrips" Type="Int32" />
+          <Property Name="PreviousMonthDayTrips" Type="Int32" />
+          <Property Name="CurrentMonthDayMileage" Type="Double" />
+          <Property Name="PreviousMonthDayMileage" Type="Double" />
+        </EntityType>
+
+        <EntityType Name="DashboardMonthlyData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountID" Type="Int32" Nullable="false" />
+          <Property Name="YearMonth" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DurationInMin" Type="Int32" DefaultValue="0" />
+          <Property Name="Mileage" Type="Double" DefaultValue="0" />
+          <Property Name="Score" Type="Int32" DefaultValue="0" />
+          <Property Name="NegativeEvents" Type="Int32" DefaultValue="0" />
+          <Property Name="Trips" Type="Int32" DefaultValue="0" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="3" annotation:StoreGeneratedPattern="None" />
+          <Property Name="Deleted" Type="Boolean" annotation:StoreGeneratedPattern="None" DefaultValue="false" />
+        </EntityType>
+        <EntityType Name="Devices">
+          <Key>
+            <PropertyRef Name="IoTHubDeviceID" />
+          </Key>
+          <Property Name="IoTHubDeviceID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IoTHubHostName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IoTHubProtocol" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="isActive" Type="Boolean" annotation:StoreGeneratedPattern="None" DefaultValue="false" />
+          <Property Name="AccountID" Type="Int32" />
+          <Property Name="AccelerationAxis" Type="String" MaxLength="5" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="None" DefaultValue="'X'" />
+          <Property Name="HardAccelerationValue" Type="Double" annotation:StoreGeneratedPattern="None" DefaultValue="2" />
+          <Property Name="HardBreakValue" Type="Double" annotation:StoreGeneratedPattern="None" DefaultValue="-2" />
+          <Property Name="RegisterCountry" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="3" annotation:StoreGeneratedPattern="None" />
+          <Property Name="Deleted" Type="Boolean" annotation:StoreGeneratedPattern="None" DefaultValue="false" />
+        </EntityType>
+        <EntityType Name="IoTHubs">
+          <Key>
+            <PropertyRef Name="IoTHubHostName" />
+          </Key>
+          <Property Name="IoTHubHostName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PrimaryIoTHubConnectionString" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="SecondaryIoTHubConnectionString" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="3" annotation:StoreGeneratedPattern="None" />
+          <Property Name="Deleted" Type="Boolean" annotation:StoreGeneratedPattern="None" DefaultValue="false" />
+        </EntityType>
+        <EntityType Name="TripPoints">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TripID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CarID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IoTHubDeviceID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MessageType" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="RecordedTimeStamp" Type="Int64" />
+          <Property Name="Country" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="LocalTime" Type="DateTime" Precision="3" />
+          <Property Name="MidNightDrive" Type="Boolean" />
+          <Property Name="Altitude" Type="Decimal" Precision="12" Scale="9" />
+          <Property Name="Latitude" Type="Decimal" Precision="12" Scale="9" />
+          <Property Name="Longitude" Type="Decimal" Precision="12" Scale="9" />
+          <Property Name="Speed" Type="Double" />
+          <Property Name="SpeedLimit" Type="Double" />
+          <Property Name="OverSpeed" Type="Boolean" />
+          <Property Name="RPM" Type="Double" />
+          <Property Name="AccelerationX" Type="Double" />
+          <Property Name="AccelerationY" Type="Double" />
+          <Property Name="AccelerationZ" Type="Double" />
+          <Property Name="AccelerationXYZ" Type="Double" />
+          <Property Name="MAF" Type="Double" />
+          <Property Name="Temp" Type="Double" />
+          <Property Name="IdlingStartTime" Type="Int64" />
+          <Property Name="IdlingEndTime" Type="Int64" />
+          <Property Name="IdlingTime" Type="Int64" />
+          <Property Name="TripStartTime" Type="Int64" />
+          <Property Name="TripEndTime" Type="Int64" />
+          <Property Name="TripTime" Type="Int64" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="3" annotation:StoreGeneratedPattern="None" />
+          <Property Name="Deleted" Type="Boolean" annotation:StoreGeneratedPattern="None" DefaultValue="false" />
+        </EntityType>
+        <EntityType Name="Trips">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CarID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IoTHubDeviceID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AccountID" Type="Int32" />
+          <Property Name="StartTimeStamp" Type="Int64" Nullable="false" />
+          <Property Name="EndTimeStamp" Type="Int64" />
+          <Property Name="StartDateTime" Type="DateTime" Precision="3" />
+          <Property Name="StartCountry" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="EndCountry" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="isComplete" Type="Boolean" annotation:StoreGeneratedPattern="None" />
+          <Property Name="Distance" Type="Double" DefaultValue="0" />
+          <Property Name="HardBreaks" Type="Int32" DefaultValue="0" />
+          <Property Name="HardAccelerations" Type="Int32" DefaultValue="0" />
+          <Property Name="OverSpeeds" Type="Int32" DefaultValue="0" />
+          <Property Name="MaxSpeed" Type="Double" DefaultValue="0" />
+          <Property Name="AverageSpeed" Type="Double" DefaultValue="0" />
+          <Property Name="MidNightDriveInSec" Type="Int32" DefaultValue="0" />
+          <Property Name="DriveTimeInSec" Type="Int32" DefaultValue="0" />
+          <Property Name="IdelingTimeInSec" Type="Int32" DefaultValue="0" />
+          <Property Name="ProcessCompleteFlag" Type="Boolean" annotation:StoreGeneratedPattern="None" DefaultValue="false" />
+          <Property Name="Rating" Type="Int32" DefaultValue="0" />
+          <Property Name="CenterLat" Type="Decimal" Precision="12" Scale="9" DefaultValue="0" />
+          <Property Name="CenterLng" Type="Decimal" Precision="12" Scale="9" DefaultValue="0" />
+          <Property Name="MaxLat" Type="Decimal" Precision="12" Scale="9" DefaultValue="0" />
+          <Property Name="Maxlng" Type="Decimal" Precision="12" Scale="9" DefaultValue="0" />
+          <Property Name="MinLat" Type="Decimal" Precision="12" Scale="9" DefaultValue="0" />
+          <Property Name="MinLng" Type="Decimal" Precision="12" Scale="9" DefaultValue="0" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="3" annotation:StoreGeneratedPattern="None" />
+          <Property Name="Deleted" Type="Boolean" annotation:StoreGeneratedPattern="None" DefaultValue="false" />
+        </EntityType>
+        <EntityContainer Name="SunnyPointEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AccountProfiles" EntityType="Self.AccountProfiles" />
+          <EntitySet Name="DashboardMonthlyData" EntityType="Self.DashboardMonthlyData" />
+          <EntitySet Name="Devices" EntityType="Self.Devices" />
+          <EntitySet Name="IoTHubs" EntityType="Self.IoTHubs" />
+          <EntitySet Name="TripPoints" EntityType="Self.TripPoints" />
+          <EntitySet Name="Trips" EntityType="Self.Trips" />
+          <EntitySet Name="DashboardCurrentData" EntityType="SunnyPointModel.DashboardCurrentData" />
+        </EntityContainer>
+ 
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SunnyPointModelStoreContainer" CdmEntityContainer="SunnyPointEntities">
+          <EntitySetMapping Name="AccountProfiles">
+            <EntityTypeMapping TypeName="SunnyPointModel.AccountProfiles">
+              <MappingFragment StoreEntitySet="AccountProfiles">
+                <ScalarProperty Name="TimeZone" ColumnName="TimeZone" />
+                <ScalarProperty Name="OverSpeeds" ColumnName="OverSpeeds" />
+                <ScalarProperty Name="MidnightDriveInMin" ColumnName="MidnightDriveInMin" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="LoginID" ColumnName="LoginID" />
+                <ScalarProperty Name="LoginPassword" ColumnName="LoginPassword" />
+                <ScalarProperty Name="ProfilePictureUri" ColumnName="ProfilePictureUri" />
+                <ScalarProperty Name="isCompany" ColumnName="isCompany" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="Ranking" ColumnName="Ranking" />
+                <ScalarProperty Name="Trips" ColumnName="Trips" />
+                <ScalarProperty Name="Distance" ColumnName="Distance" />
+                <ScalarProperty Name="DriveTimeInMin" ColumnName="DriveTimeInMin" />
+                <ScalarProperty Name="HardBreaks" ColumnName="HardBreaks" />
+                <ScalarProperty Name="HardAccelerations" ColumnName="HardAccelerations" />
+                <ScalarProperty Name="FuelConsumption" ColumnName="FuelConsumption" />
+                <ScalarProperty Name="MaxSpeed" ColumnName="MaxSpeed" />
+                <ScalarProperty Name="AverageSpeed" ColumnName="AverageSpeed" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+
+          <EntitySetMapping Name="DashboardCurrentData">
+            <EntityTypeMapping TypeName="SunnyPointModel.DashboardCurrentData">
+              <MappingFragment StoreEntitySet="DashboardCurrentData">
+                <ScalarProperty Name="PreviousMonthDayMileage" ColumnName="PreviousMonthDayMileage" />
+                <ScalarProperty Name="CurrentMonthDayMileage" ColumnName="CurrentMonthDayMileage" />
+                <ScalarProperty Name="PreviousMonthDayTrips" ColumnName="PreviousMonthDayTrips" />
+                <ScalarProperty Name="CurrentMonthDayTrips" ColumnName="CurrentMonthDayTrips" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+                <ScalarProperty Name="CurrentMonthScore" ColumnName="CurrentMonthScore" />
+                <ScalarProperty Name="PreviousMonthScore" ColumnName="PreviousMonthScore" />
+                <ScalarProperty Name="CurrentMonthNegativeEvents" ColumnName="CurrentMonthNegativeEvents" />
+                <ScalarProperty Name="PreviousMonthNegativeEvents" ColumnName="PreviousMonthNegativeEvents" />
+                <ScalarProperty Name="HardBreaks" ColumnName="HardBreaks" />
+                <ScalarProperty Name="HardAccelerations" ColumnName="HardAccelerations" />
+                <ScalarProperty Name="OverSpeed" ColumnName="OverSpeed" />
+                <ScalarProperty Name="Day_NegativeEvents" ColumnName="Day_NegativeEvents" />
+                <ScalarProperty Name="Midnight_NegativeEvents" ColumnName="Midnight_NegativeEvents" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+
+          <EntitySetMapping Name="DashboardMonthlyData">
+            <EntityTypeMapping TypeName="SunnyPointModel.DashboardMonthlyData">
+              <MappingFragment StoreEntitySet="DashboardMonthlyData">
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+                <ScalarProperty Name="YearMonth" ColumnName="YearMonth" />
+                <ScalarProperty Name="DurationInMin" ColumnName="DurationInMin" />
+                <ScalarProperty Name="Mileage" ColumnName="Mileage" />
+                <ScalarProperty Name="Score" ColumnName="Score" />
+                <ScalarProperty Name="NegativeEvents" ColumnName="NegativeEvents" />
+                <ScalarProperty Name="Trips" ColumnName="Trips" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Devices">
+            <EntityTypeMapping TypeName="SunnyPointModel.Devices">
+              <MappingFragment StoreEntitySet="Devices">
+                <ScalarProperty Name="IoTHubDeviceID" ColumnName="IoTHubDeviceID" />
+                <ScalarProperty Name="IoTHubHostName" ColumnName="IoTHubHostName" />
+                <ScalarProperty Name="IoTHubProtocol" ColumnName="IoTHubProtocol" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+                <ScalarProperty Name="AccelerationAxis" ColumnName="AccelerationAxis" />
+                <ScalarProperty Name="HardAccelerationValue" ColumnName="HardAccelerationValue" />
+                <ScalarProperty Name="HardBreakValue" ColumnName="HardBreakValue" />
+                <ScalarProperty Name="RegisterCountry" ColumnName="RegisterCountry" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IoTHubs">
+            <EntityTypeMapping TypeName="SunnyPointModel.IoTHubs">
+              <MappingFragment StoreEntitySet="IoTHubs">
+                <ScalarProperty Name="IoTHubHostName" ColumnName="IoTHubHostName" />
+                <ScalarProperty Name="PrimaryIoTHubConnectionString" ColumnName="PrimaryIoTHubConnectionString" />
+                <ScalarProperty Name="SecondaryIoTHubConnectionString" ColumnName="SecondaryIoTHubConnectionString" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TripPoints">
+            <EntityTypeMapping TypeName="SunnyPointModel.TripPoints">
+              <MappingFragment StoreEntitySet="TripPoints">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TripID" ColumnName="TripID" />
+                <ScalarProperty Name="CarID" ColumnName="CarID" />
+                <ScalarProperty Name="IoTHubDeviceID" ColumnName="IoTHubDeviceID" />
+                <ScalarProperty Name="MessageType" ColumnName="MessageType" />
+                <ScalarProperty Name="RecordedTimeStamp" ColumnName="RecordedTimeStamp" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="LocalTime" ColumnName="LocalTime" />
+                <ScalarProperty Name="MidNightDrive" ColumnName="MidNightDrive" />
+                <ScalarProperty Name="Altitude" ColumnName="Altitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Speed" ColumnName="Speed" />
+                <ScalarProperty Name="SpeedLimit" ColumnName="SpeedLimit" />
+                <ScalarProperty Name="OverSpeed" ColumnName="OverSpeed" />
+                <ScalarProperty Name="RPM" ColumnName="RPM" />
+                <ScalarProperty Name="AccelerationX" ColumnName="AccelerationX" />
+                <ScalarProperty Name="AccelerationY" ColumnName="AccelerationY" />
+                <ScalarProperty Name="AccelerationZ" ColumnName="AccelerationZ" />
+                <ScalarProperty Name="AccelerationXYZ" ColumnName="AccelerationXYZ" />
+                <ScalarProperty Name="MAF" ColumnName="MAF" />
+                <ScalarProperty Name="Temp" ColumnName="Temp" />
+                <ScalarProperty Name="IdlingStartTime" ColumnName="IdlingStartTime" />
+                <ScalarProperty Name="IdlingEndTime" ColumnName="IdlingEndTime" />
+                <ScalarProperty Name="IdlingTime" ColumnName="IdlingTime" />
+                <ScalarProperty Name="TripStartTime" ColumnName="TripStartTime" />
+                <ScalarProperty Name="TripEndTime" ColumnName="TripEndTime" />
+                <ScalarProperty Name="TripTime" ColumnName="TripTime" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Trips">
+            <EntityTypeMapping TypeName="SunnyPointModel.Trips">
+              <MappingFragment StoreEntitySet="Trips">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CarID" ColumnName="CarID" />
+                <ScalarProperty Name="IoTHubDeviceID" ColumnName="IoTHubDeviceID" />
+                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+                <ScalarProperty Name="StartTimeStamp" ColumnName="StartTimeStamp" />
+                <ScalarProperty Name="EndTimeStamp" ColumnName="EndTimeStamp" />
+                <ScalarProperty Name="StartDateTime" ColumnName="StartDateTime" />
+                <ScalarProperty Name="StartCountry" ColumnName="StartCountry" />
+                <ScalarProperty Name="EndCountry" ColumnName="EndCountry" />
+                <ScalarProperty Name="isComplete" ColumnName="isComplete" />
+                <ScalarProperty Name="Distance" ColumnName="Distance" />
+                <ScalarProperty Name="HardBreaks" ColumnName="HardBreaks" />
+                <ScalarProperty Name="HardAccelerations" ColumnName="HardAccelerations" />
+                <ScalarProperty Name="OverSpeeds" ColumnName="OverSpeeds" />
+                <ScalarProperty Name="MaxSpeed" ColumnName="MaxSpeed" />
+                <ScalarProperty Name="AverageSpeed" ColumnName="AverageSpeed" />
+                <ScalarProperty Name="MidNightDriveInSec" ColumnName="MidNightDriveInSec" />
+                <ScalarProperty Name="DriveTimeInSec" ColumnName="DriveTimeInSec" />
+                <ScalarProperty Name="IdelingTimeInSec" ColumnName="IdelingTimeInSec" />
+                <ScalarProperty Name="ProcessCompleteFlag" ColumnName="ProcessCompleteFlag" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="CenterLat" ColumnName="CenterLat" />
+                <ScalarProperty Name="CenterLng" ColumnName="CenterLng" />
+                <ScalarProperty Name="MaxLat" ColumnName="MaxLat" />
+                <ScalarProperty Name="Maxlng" ColumnName="Maxlng" />
+                <ScalarProperty Name="MinLat" ColumnName="MinLat" />
+                <ScalarProperty Name="MinLng" ColumnName="MinLng" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DashboardCurrentData">
+            <EntityTypeMapping TypeName="SunnyPointModel.DashboardCurrentData">
+              <MappingFragment StoreEntitySet="DashboardCurrentData">
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="Midnight_NegativeEvents" ColumnName="Midnight_NegativeEvents" />
+                <ScalarProperty Name="Day_NegativeEvents" ColumnName="Day_NegativeEvents" />
+                <ScalarProperty Name="OverSpeed" ColumnName="OverSpeed" />
+                <ScalarProperty Name="HardAccelerations" ColumnName="HardAccelerations" />
+                <ScalarProperty Name="HardBreaks" ColumnName="HardBreaks" />
+                <ScalarProperty Name="PreviousMonthDayMileage" ColumnName="PreviousMonthDayMileage" />
+                <ScalarProperty Name="CurrentMonthDayMileage" ColumnName="CurrentMonthDayMileage" />
+                <ScalarProperty Name="PreviousMonthDayTrips" ColumnName="PreviousMonthDayTrips" />
+                <ScalarProperty Name="CurrentMonthDayTrips" ColumnName="CurrentMonthDayTrips" />
+                <ScalarProperty Name="PreviousMonthNegativeEvents" ColumnName="PreviousMonthNegativeEvents" />
+                <ScalarProperty Name="CurrentMonthNegativeEvents" ColumnName="CurrentMonthNegativeEvents" />
+                <ScalarProperty Name="PreviousMonthScore" ColumnName="PreviousMonthScore" />
+                <ScalarProperty Name="CurrentMonthScore" ColumnName="CurrentMonthScore" />
+                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

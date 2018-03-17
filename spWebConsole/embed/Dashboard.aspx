@@ -1,0 +1,2 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Dashboard.aspx.cs" Inherits="spWebConsole.embed.Dashboard" %>
+<div style="margin-left:200px; margin-top:200px;"><img src="../assets/images/comingson.png" /></div>

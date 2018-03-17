@@ -1,0 +1,27 @@
+SELECT
+    tripID as Id, carID, deviceID as ioTHubDeviceID, msgTS as StartTimeStamp
+INTO
+    [SQL-Table-Trips]
+FROM
+    [SP-Devices]
+Where
+    msgType = 'trip_start' AND deviceID is NOT NULL AND tripID is NOT NULL AND Len(tripID) > 0 AND Len(deviceID) > 0
+    
+    
+SELECT 
+ tripID, carID, deviceID as ioTHubDeviceID, msgType as messageType, msgTS as recordedTimeStamp, alt as altitude, 
+ lat as latitude, lng as longitude, speed, rpm, maf, temp, aclX as accelerationX, aclY as accelerationY, 
+ aclZ as accelerationZ, aclXYZ as accelerationXYZ, idlingSTime as IdlingStartTime, idlingETime as IdlingEndTime, 
+ idlingTime, tripSTime as TripStartTime, tripETime as TripEndTime, TripTime 
+ INTO
+    [SQL-Table-TripPoints]
+FROM [SP-Devices]
+ Where deviceID is NOT NULL AND tripID is NOT NULL AND Len(tripID) > 0 AND Len(deviceID) > 0
+
+SELECT  
+    msgType as command, tripID
+INTO
+    [MessageBus-Queue]
+FROM [SP-Devices]
+Where
+    msgType = 'trip_end' AND deviceID is NOT NULL AND tripID is NOT NULL AND Len(tripID) > 0 AND Len(deviceID) > 0

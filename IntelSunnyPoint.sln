@@ -1,0 +1,67 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "spDongleService", "spDongleService\spDongleService.csproj", "{D7E3D49F-669C-4EC7-83AE-61F5E48DDE7C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "spDongleEmulator", "spDongleEmulator\spDongleEmulator.csproj", "{46A90597-365D-4580-978C-A54A076FCD0C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "spServiceBusQueueComsumer", "spServiceBusQueueComsumer\spServiceBusQueueComsumer.csproj", "{68E88EC8-5E03-4091-B61A-30D66BD0A6F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShareClasses", "ShareClasses\ShareClasses.csproj", "{96CD1A36-ADF2-4F1E-AEF4-EB4DD03025C9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "spDatabase", "spDatabase", "{84E502B9-26C5-4850-B442-1CB5F1E6B9A0}"
+	ProjectSection(SolutionItems) = preProject
+		spDatabase\01_CreateSchema.sql = spDatabase\01_CreateSchema.sql
+		spDatabase\02_CreateTables.sql = spDatabase\02_CreateTables.sql
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "spStreamAnalytic", "spStreamAnalytic", "{E26C3169-6E82-4031-ACDE-C0CE2E563382}"
+	ProjectSection(SolutionItems) = preProject
+		spStreamAnalytics\01_SAQL.txt = spStreamAnalytics\01_SAQL.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "spDesignDoc", "spDesignDoc", "{4DE64424-E774-4908-A2D7-936EBA356FD1}"
+	ProjectSection(SolutionItems) = preProject
+		spDesignDoc\Diagram-Flow.vsd = spDesignDoc\Diagram-Flow.vsd
+		spDesignDoc\ECGCAT Functional Spec - IntelSunnyPoint.docx = spDesignDoc\ECGCAT Functional Spec - IntelSunnyPoint.docx
+		spDesignDoc\Intel IoT Project - Sunny Point Design Doc V1.2.docx = spDesignDoc\Intel IoT Project - Sunny Point Design Doc V1.2.docx
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "spWebConsole", "spWebConsole\spWebConsole.csproj", "{8DABC5D8-02BC-4977-941D-786C8B4F391A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D7E3D49F-669C-4EC7-83AE-61F5E48DDE7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7E3D49F-669C-4EC7-83AE-61F5E48DDE7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7E3D49F-669C-4EC7-83AE-61F5E48DDE7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7E3D49F-669C-4EC7-83AE-61F5E48DDE7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46A90597-365D-4580-978C-A54A076FCD0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46A90597-365D-4580-978C-A54A076FCD0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46A90597-365D-4580-978C-A54A076FCD0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46A90597-365D-4580-978C-A54A076FCD0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68E88EC8-5E03-4091-B61A-30D66BD0A6F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68E88EC8-5E03-4091-B61A-30D66BD0A6F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68E88EC8-5E03-4091-B61A-30D66BD0A6F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68E88EC8-5E03-4091-B61A-30D66BD0A6F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96CD1A36-ADF2-4F1E-AEF4-EB4DD03025C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96CD1A36-ADF2-4F1E-AEF4-EB4DD03025C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96CD1A36-ADF2-4F1E-AEF4-EB4DD03025C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96CD1A36-ADF2-4F1E-AEF4-EB4DD03025C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DABC5D8-02BC-4977-941D-786C8B4F391A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DABC5D8-02BC-4977-941D-786C8B4F391A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DABC5D8-02BC-4977-941D-786C8B4F391A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DABC5D8-02BC-4977-941D-786C8B4F391A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.TransientFaultHandling.6.0.1304.0\lib\portable-net45+win+wp8
+	EndGlobalSection
+EndGlobal
